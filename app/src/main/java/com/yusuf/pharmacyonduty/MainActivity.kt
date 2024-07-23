@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.yusuf.feature.home.Greeting
 import com.yusuf.pharmacyonduty.ui.theme.PharmacyOnDutyTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,28 +21,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             PharmacyOnDutyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+                    Greeting("Yusuf", modifier = Modifier.padding(innerPadding))
+
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PharmacyOnDutyTheme {
-        Greeting("Android")
     }
 }
