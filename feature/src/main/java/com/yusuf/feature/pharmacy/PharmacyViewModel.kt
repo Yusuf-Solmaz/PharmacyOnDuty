@@ -22,11 +22,11 @@ class PharmacyViewModel @Inject constructor(
     val rootPharmacyState: Flow<PharmacyUIState> = _rootPharmacyState
 
     init{
-        getPharmacy("kutahya","tavsanli")
+        getPharmacyByCity("kutahya","tavsanli")
     }
 
-    fun getPharmacy(city: String, district: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun getPharmacyByCity(city: String, district: String) {
+        viewModelScope.launch {
             pharmacyRepository.getPharmacyOnDutyByCity(city = city, district = district)
                 .collect { result ->
                     when (result) {
