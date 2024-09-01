@@ -22,7 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "PharmacyOnDuty"
 include(":app")
 include(":data")
-include(":pharmacy")
 include(":feature")
 include(":domain")
-include(":library")
