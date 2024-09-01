@@ -1,7 +1,5 @@
 package com.yusuf.data.di
 
-
-import com.yusuf.data.BuildConfig
 import com.yusuf.data.remote.PharmacyApi
 import com.yusuf.data.util.NetworkConstants.BASE_URL
 import dagger.Module
