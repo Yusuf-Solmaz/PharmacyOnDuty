@@ -1,11 +1,11 @@
 package com.yusuf.data.mapper
 
 import com.yusuf.domain.model.city.CityRoot
-import com.yusuf.domain.model.city.CityRootDto
+import com.yusuf.data.remote.dto.city.CityRootDto
 import com.yusuf.domain.model.city.Data
-import com.yusuf.domain.model.city.DataDto
+import com.yusuf.data.remote.dto.city.DataDto
 
-fun CityRootDto.toCityRoot(): CityRoot {
+internal fun CityRootDto.toCityRoot(): CityRoot {
     return CityRoot(
         creditUsed = creditUsed,
         data = data.map { it.toData() },
@@ -19,7 +19,7 @@ fun CityRootDto.toCityRoot(): CityRoot {
 }
 
 
-fun DataDto.toData(): Data {
+internal fun DataDto.toData(): Data {
     return Data(
         cities = cities,
         slug = slug
