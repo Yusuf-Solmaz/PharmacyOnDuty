@@ -1,4 +1,4 @@
-package com.yusuf.domain.model.pharmacyByLocation
+import com.yusuf.data.remote.dto.pharmacyByLocation.DataDto
 
 data class PharmacyByLocationRootDto(
     val creditUsed: Int,
