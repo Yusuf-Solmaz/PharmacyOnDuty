@@ -1,4 +1,4 @@
-package com.yusuf.domain.model.pharmacy
+package com.yusuf.data.remote.dto.pharmacy
 
 data class DataDto(
     val address: String,

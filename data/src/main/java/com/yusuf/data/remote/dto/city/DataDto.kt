@@ -1,4 +1,4 @@
-package com.yusuf.domain.model.city
+package com.yusuf.data.remote.dto.city
 
 data class DataDto(
     val cities: String,
