@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yusuf.domain.model.city.CityRoot
@@ -42,7 +43,15 @@ fun PharmacyOnDuty(viewModel: PharmacyViewModel = hiltViewModel()) {
         if (cityState.isLoading || districtState.isLoading) {
             Text(text = "Loading", modifier = Modifier.padding(16.dp))
         } else {
-            Row (Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+            Row (Modifier.fillMaxWidth(),
+                horizontalArrangement = if(districtState.cities == null){
+                    Arrangement.Center
+                }
+                else{
+                    Log.e("PharmacyOnDutycities", districtState.cities.toString())
+                    Arrangement.SpaceBetween
+                }
+            ){
                 Row (Modifier.weight(1f)){
                     CityDropdown(
                         cities = cityState.cities,
@@ -54,19 +63,19 @@ fun PharmacyOnDuty(viewModel: PharmacyViewModel = hiltViewModel()) {
                         }
                     )
                 }
-                Row (Modifier.weight(1f)){
-                    DistrictDropdown(
-                        districts = districtState.cities,
-                        selectedDistrict = selectedDistrict,
-                        districtExpanded = districtExpanded,
-                        onDistrictSelected = { districtSlug ->
-                            viewModel.fetchPharmacyByCity(selectedCitySlug.value, districtSlug)
-                        }
-                    )
+                if (districtState.cities != null){
+                    Row (Modifier.weight(1f)){
+                        DistrictDropdown(
+                            districts = districtState.cities,
+                            selectedDistrict = selectedDistrict,
+                            districtExpanded = districtExpanded,
+                            onDistrictSelected = { districtSlug ->
+                                viewModel.fetchPharmacyByCity(selectedCitySlug.value, districtSlug)
+                            }
+                        )
+                    }
                 }
             }
-
-
             PharmacyList(pharmacyUIState = pharmacyUIState)
         }
     }
@@ -101,7 +110,8 @@ fun CityDropdown(
         DropdownMenu(
             modifier = Modifier.size(width = 150.dp, height = 200.dp),
             expanded = cityExpanded.value,
-            onDismissRequest = { cityExpanded.value = false }
+            onDismissRequest = { cityExpanded.value = false },
+            offset =  DpOffset(x = 30.dp, y = 0.dp)
         ) {
             cities?.data?.forEach { city ->
                 DropdownMenuItem(
@@ -124,7 +134,6 @@ fun DistrictDropdown(
     districtExpanded: MutableState<Boolean>,
     onDistrictSelected: (String) -> Unit
 ) {
-    if (districts != null) {
         Row(
             modifier = Modifier
                 .clickable { districtExpanded.value = true }
@@ -141,13 +150,12 @@ fun DistrictDropdown(
                 contentDescription = "Dropdown Icon"
             )
         }
-
         DropdownMenu(
             modifier = Modifier.size(width = 150.dp, height = 200.dp),
             expanded = districtExpanded.value,
             onDismissRequest = { districtExpanded.value = false }
         ) {
-            districts.data.forEach { district ->
+            districts?.data?.forEach { district ->
                 DropdownMenuItem(
                     text = { Text(text = district.cities) },
                     onClick = {
@@ -158,7 +166,6 @@ fun DistrictDropdown(
                 )
             }
         }
-    }
 }
 
 @Composable
