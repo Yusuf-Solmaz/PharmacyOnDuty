@@ -1,11 +1,11 @@
 package com.yusuf.data.mapper
 
 import com.yusuf.domain.model.pharmacy.Data
-import com.yusuf.domain.model.pharmacy.DataDto
+import com.yusuf.data.remote.dto.pharmacy.DataDto
 import com.yusuf.domain.model.pharmacy.PharmacyRoot
-import com.yusuf.domain.model.pharmacy.PharmacyRootDto
+import com.yusuf.data.remote.dto.pharmacy.PharmacyRootDto
 
-fun PharmacyRootDto.toPharmacyRoot(): PharmacyRoot{
+internal fun PharmacyRootDto.toPharmacyRoot(): PharmacyRoot{
     return PharmacyRoot(
         creditUsed = creditUsed,
         data = data.map { it.toData() },
@@ -18,7 +18,7 @@ fun PharmacyRootDto.toPharmacyRoot(): PharmacyRoot{
     )
 }
 
-fun DataDto.toData(): Data {
+internal fun DataDto.toData(): Data {
     return Data(
         address = address,
         city = city,
