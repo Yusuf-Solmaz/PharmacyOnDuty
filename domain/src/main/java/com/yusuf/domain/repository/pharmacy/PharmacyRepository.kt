@@ -5,5 +5,5 @@ import com.yusuf.domain.util.RootResult
 import kotlinx.coroutines.flow.Flow
 
 interface PharmacyRepository {
-    suspend fun getPharmacyOnDutyByCity(city: String, district: String): Flow<RootResult<PharmacyRoot>>
+    fun getPharmacyOnDutyByCity(city: String, district: String): Flow<RootResult<PharmacyRoot>>
 }

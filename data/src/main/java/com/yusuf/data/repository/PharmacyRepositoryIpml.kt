@@ -15,7 +15,7 @@ class PharmacyRepositoryImpl @Inject constructor(
     private val api: PharmacyApi
 ) : PharmacyRepository {
 
-     override suspend fun getPharmacyOnDutyByCity(city: String, district: String): Flow<RootResult<PharmacyRoot>> = flow {
+     override fun getPharmacyOnDutyByCity(city: String, district: String): Flow<RootResult<PharmacyRoot>> = flow {
         try {
             emit(RootResult.Loading)
             val response =api.getPharmaciesOnDuty(city = city, district = district)
