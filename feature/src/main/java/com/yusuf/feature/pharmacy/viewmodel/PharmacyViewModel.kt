@@ -7,6 +7,7 @@ import com.yusuf.domain.use_case.GetPharmacyOnDutyByCityUseCase
 import com.yusuf.domain.util.RootResult
 import com.yusuf.feature.pharmacy.state.CityState
 import com.yusuf.feature.pharmacy.state.PharmacyUIState
+import com.yusuf.utils.createStateFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,8 +27,12 @@ class PharmacyViewModel @Inject constructor(
     private val _cityState = MutableStateFlow(CityState())
     internal val cityState: StateFlow<CityState> = _cityState
 
-    private val _districtState = MutableStateFlow(CityState())
-    internal val districtState: StateFlow<CityState> = _districtState
+    private var _districtState: MutableStateFlow<CityState>? = null
+    internal val districtState: StateFlow<CityState>
+        get() {
+            _districtState = createStateFlow(_districtState, CityState())
+            return _districtState ?: throw AssertionError("districtState should not be null")
+        }
 
     init {
         fetchCities()
@@ -64,7 +69,7 @@ class PharmacyViewModel @Inject constructor(
     fun fetchDistricts(citySlug: String) {
         viewModelScope.launch {
             getCitiesUseCase(citySlug).collect { result ->
-                _districtState.update { state ->
+                _districtState?.update { state ->
                     when (result) {
                         is RootResult.Error -> state.copy(isLoading = false, error = result.message)
                         RootResult.Loading -> state.copy(isLoading = true)
