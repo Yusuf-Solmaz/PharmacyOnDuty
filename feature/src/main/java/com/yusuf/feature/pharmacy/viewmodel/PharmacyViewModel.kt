@@ -7,7 +7,7 @@ import com.yusuf.domain.use_case.GetPharmacyOnDutyByCityUseCase
 import com.yusuf.domain.util.RootResult
 import com.yusuf.feature.pharmacy.state.CityState
 import com.yusuf.feature.pharmacy.state.PharmacyUIState
-import com.yusuf.utils.createStateFlow
+import com.yusuf.utils.StateFlowHelper.createStateFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,10 +22,12 @@ class PharmacyViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _pharmacyUIState = MutableStateFlow(PharmacyUIState())
-    internal val pharmacyUIState: StateFlow<PharmacyUIState> = _pharmacyUIState
+    internal val pharmacyUIState: StateFlow<PharmacyUIState>
+        get() = _pharmacyUIState
 
     private val _cityState = MutableStateFlow(CityState())
-    internal val cityState: StateFlow<CityState> = _cityState
+    internal val cityState: StateFlow<CityState>
+        get() = _cityState
 
     private var _districtState: MutableStateFlow<CityState>? = null
     internal val districtState: StateFlow<CityState>
