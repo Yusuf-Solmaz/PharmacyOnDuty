@@ -8,7 +8,7 @@ Pharmacy On Duty (Example Multi-Module App)
 
 * Pharmacy on Duty is an on-call pharmacy application that adopts a multi-module architecture. The user interface is quite simple and the user can access the pharmacy on duty information by selecting the city and district.
 
-* This app is designed for Medium writing. You can find the Medium link here [https://medium.com/@yusufmucahitsolmaz/androidde-multi-module-mimarisi-%C3%B6rnek-bir-proje-%C3%BCzerinden-anlat%C4%B1m-b0f50d36d748] or at the end of the page.
+* This app is designed for Medium writing. You can find the Medium link [here](https://medium.com/@yusufmucahitsolmaz/androidde-multi-module-mimarisi-%C3%B6rnek-bir-proje-%C3%BCzerinden-anlat%C4%B1m-b0f50d36d748) or at the end of the page.
 
 ## Dependencies Used
 --------------------------------
@@ -19,5 +19,5 @@ Pharmacy On Duty (Example Multi-Module App)
 * [Coroutines](https://developer.android.com/kotlin/coroutines?hl=en)
 * [Flow](https://developer.android.com/kotlin/flow)
 
-## Medium Link [https://medium.com/@yusufmucahitsolmaz/androidde-multi-module-mimarisi-%C3%B6rnek-bir-proje-%C3%BCzerinden-anlat%C4%B1m-b0f50d36d748]
+## [Medium Link](https://medium.com/@yusufmucahitsolmaz/androidde-multi-module-mimarisi-%C3%B6rnek-bir-proje-%C3%BCzerinden-anlat%C4%B1m-b0f50d36d748)
 
