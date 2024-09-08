@@ -1,8 +1,8 @@
-package com.yusuf.domain.model.pharmacy
+package com.yusuf.domain.model.base
 
-data class PharmacyRoot(
+data class RootData<T>(
     val creditUsed: Int,
-    val `data`: List<Data>,
+    val data: List<T>,
     val endpoint: String,
     val message: String,
     val messageTR: String,

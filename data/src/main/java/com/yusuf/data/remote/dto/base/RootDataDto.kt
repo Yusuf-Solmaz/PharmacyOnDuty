@@ -1,8 +1,8 @@
-package com.yusuf.domain.model.city
+package com.yusuf.data.remote.dto.base
 
-data class CityRoot(
+data class RootDataDto<T>(
     val creditUsed: Int,
-    val `data`: List<Data>,
+    val data: List<T>,
     val endpoint: String,
     val message: String,
     val messageTR: String,
