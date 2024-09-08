@@ -1,12 +1,9 @@
-package com.yusuf.data.remote.dto.pharmacyByLocation
+package com.yusuf.data.remote.dto.pharmacy
 
-data class DataDto(
+data class PharmacyDataDto(
     val address: String,
     val city: String,
     val directions: String,
-    val distanceKm: Double,
-    val distanceMil: Double,
-    val distanceMt: Int,
     val district: String,
     val latitude: Double,
     val longitude: Double,

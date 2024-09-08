@@ -1,6 +1,6 @@
 package com.yusuf.domain.model.pharmacy
 
-data class Data(
+data class PharmacyData(
     val address: String? = "",
     val city: String? = "",
     val directions: String? = "",

@@ -1,6 +1,6 @@
 package com.yusuf.domain.model.city
 
-data class Data(
+data class CityData(
     val cities: String,
     val slug: String
 )
