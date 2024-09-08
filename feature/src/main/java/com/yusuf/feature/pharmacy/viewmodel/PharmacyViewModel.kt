@@ -47,7 +47,7 @@ class PharmacyViewModel @Inject constructor(
                     when (result) {
                         is RootResult.Error -> state.copy(isLoading = false, error = result.message)
                         RootResult.Loading -> state.copy(isLoading = true)
-                        is RootResult.Success -> state.copy(isLoading = false, rootResponse = result.data)
+                        is RootResult.Success -> state.copy(isLoading = false, rootDataResponse = result.data)
                     }
                 }
             }

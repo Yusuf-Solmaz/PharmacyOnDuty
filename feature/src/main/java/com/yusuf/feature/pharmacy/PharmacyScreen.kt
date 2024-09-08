@@ -17,7 +17,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.yusuf.domain.model.city.CityRoot
+import com.yusuf.domain.model.base.RootData
+import com.yusuf.domain.model.city.CityData
 import com.yusuf.feature.pharmacy.state.PharmacyUIState
 import com.yusuf.feature.pharmacy.viewmodel.PharmacyViewModel
 
@@ -53,20 +54,22 @@ fun PharmacyOnDuty(viewModel: PharmacyViewModel = hiltViewModel()) {
                 }
             ){
                 Row (Modifier.weight(1f)){
-                    CityDropdown(
-                        cities = cityState.cities,
-                        selectedCity = selectedCity,
-                        selectedCitySlug = selectedCitySlug,
-                        cityExpanded = cityExpanded,
-                        onCitySelected = { citySlug ->
-                            viewModel.fetchDistricts(citySlug)
-                        }
-                    )
+                    cityState.cities?.let {
+                        CityDropdown(
+                            cities = it,
+                            selectedCity = selectedCity,
+                            selectedCitySlug = selectedCitySlug,
+                            cityExpanded = cityExpanded,
+                            onCitySelected = { citySlug ->
+                                viewModel.fetchDistricts(citySlug)
+                            }
+                        )
+                    }
                 }
                 if (districtState.cities != null){
                     Row (Modifier.weight(1f)){
                         DistrictDropdown(
-                            districts = districtState.cities,
+                            districts = districtState.cities!!,
                             selectedDistrict = selectedDistrict,
                             districtExpanded = districtExpanded,
                             onDistrictSelected = { districtSlug ->
@@ -83,7 +86,7 @@ fun PharmacyOnDuty(viewModel: PharmacyViewModel = hiltViewModel()) {
 
 @Composable
 fun CityDropdown(
-    cities: CityRoot?,
+    cities: RootData<CityData>,
     selectedCity: MutableState<String>,
     selectedCitySlug: MutableState<String>,
     cityExpanded: MutableState<Boolean>,
@@ -113,7 +116,7 @@ fun CityDropdown(
             onDismissRequest = { cityExpanded.value = false },
             offset =  DpOffset(x = 30.dp, y = 0.dp)
         ) {
-            cities?.data?.forEach { city ->
+            cities.data.forEach { city ->
                 DropdownMenuItem(
                     text = { Text(text = city.cities) },
                     onClick = {
@@ -129,7 +132,7 @@ fun CityDropdown(
 
 @Composable
 fun DistrictDropdown(
-    districts: CityRoot?,
+    districts: RootData<CityData>,
     selectedDistrict: MutableState<String>,
     districtExpanded: MutableState<Boolean>,
     onDistrictSelected: (String) -> Unit
@@ -155,7 +158,7 @@ fun DistrictDropdown(
             expanded = districtExpanded.value,
             onDismissRequest = { districtExpanded.value = false }
         ) {
-            districts?.data?.forEach { district ->
+            districts.data.forEach { district ->
                 DropdownMenuItem(
                     text = { Text(text = district.cities) },
                     onClick = {
@@ -181,10 +184,10 @@ internal fun PharmacyList(pharmacyUIState: PharmacyUIState) {
                 Text(text = pharmacyUIState.error)
                 Log.e("PharmacyOnDuty", pharmacyUIState.error)
             }
-            pharmacyUIState.rootResponse != null -> {
+            pharmacyUIState.rootDataResponse != null -> {
                 LazyColumn {
-                    items(pharmacyUIState.rootResponse.data.size) { index ->
-                        Text(text = pharmacyUIState.rootResponse.data[index].pharmacyName)
+                    items(pharmacyUIState.rootDataResponse.data.size) { index ->
+                        Text(text = pharmacyUIState.rootDataResponse.data[index].pharmacyName)
                     }
                 }
             }
