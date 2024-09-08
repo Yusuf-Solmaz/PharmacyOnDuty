@@ -21,4 +21,5 @@ interface PharmacyApi {
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY,
         @Query("city") city: String? = null
     ): RootDataDto<CityDataDto>
+
 }
